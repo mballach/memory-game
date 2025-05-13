@@ -1,0 +1,23 @@
+.card-container{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    row-gap: 25px;;
+}
+.logo{
+    height:75px;
+}
+.card{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:0px;
+    border: 2px lightgray solid;
+    width:150px;
+    border-radius: 15px;;
+    background-color: rgb(214, 243, 255);
+    font-weight: bold;
+    height:150px;
+    color:rgb(93, 93, 93)
+}
