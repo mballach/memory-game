@@ -2,7 +2,8 @@
     display:flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    row-gap: 25px;;
+    row-gap: 15px;;
+    gap:15px;
 }
 .logo{
     height:75px;
@@ -20,4 +21,20 @@
     font-weight: bold;
     height:150px;
     color:rgb(93, 93, 93)
+}
+.board{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+button{
+    background-color: rgb(73, 190, 240);
+}
+
+.scoreboard{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
 }

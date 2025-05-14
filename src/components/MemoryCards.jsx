@@ -7,7 +7,7 @@ function MemoryCards() {
     const [dataReady, setDataReady] = useState(false);
     const [error, setError] = useState(false)
     const [teams, setTeams] = useState(null)
-    const [score, setScore] = useState(null)
+    const [score, setScore] = useState(0)
     
     useEffect(()=> {
     async function returnTeamData(){
@@ -70,6 +70,13 @@ function MemoryCards() {
         console.log(newTeams)
         setTeams(newTeams)
         shuffleTeams()
+        wipeScore()
+    }
+
+    const duplicateClick = () => {
+        alert("You have already clicked here! Game over! Final Score: "+score)
+        resetClicked()
+        wipeScore()
     }
 
     function Card({team}){
@@ -83,7 +90,8 @@ function MemoryCards() {
 
         const toggleSecondClick = () => {
             console.log("You already clicked here")
-            incScore()
+            duplicateClick()
+
         }
 
         if(team.clicked===false){
@@ -91,7 +99,7 @@ function MemoryCards() {
                 <div className="card" key={team.id} onClick={toggleFirstClick}>
                             <img className='logo' src={team.logos[0].href} alt="" />
                             {team.displayName}
-                            Unclicked
+                            {team.clicked}
                             
                 </div>
         )} else {
@@ -99,7 +107,7 @@ function MemoryCards() {
                 <div className="card" key={team.id} onClick={toggleSecondClick}>
                             <img className='logo' src={team.logos[0].href} alt="" />
                             {team.displayName}
-                            Clicked
+                            {team.clicked}
                             
                 </div>
             )
@@ -125,16 +133,21 @@ function MemoryCards() {
 
     if(dataReady){
         return (
-            <>
-            <button onClick={resetClicked}>Click to reset</button>
-                <div className="card-container">
-                    {teams.map((item) => (
-                        <Card team={item} key={item.id}/>
+            <div className="board">
+                Click as many logos as you can without repeating!
+                <div className='scoreboard'>
+                    <button onClick={resetClicked}>Click to reset</button>
+                    Current Score: {score}
+                </div> 
+                    <div className="card-container">
+                        {teams.map((item) => (
+                            <Card team={item} key={item.id}/>
+                            
+                        ))}
                         
-                    ))}
-                    
-                </div>
-            </>
+                    </div>
+            </div>
+
         )
 
     }
