@@ -22,11 +22,10 @@ function MemoryCards() {
                 teams.push(j)
             }
             setTeams(teams)
-            console.log(teams)
             setDataReady(true)
         } catch (error) {
             setError(true)
-            console.error("Error fetching data:", error)
+            alert("Error fetching data: " + error)
         }
     }  
     returnTeamData()
@@ -82,14 +81,13 @@ function MemoryCards() {
         for (let i=0;i<newTeams.length;i++){
             newTeams[i].clicked=false
         }
-        console.log(newTeams)
         setTeams(newTeams)
         shuffleTeams()
         wipeScore()
     }
 
     const duplicateClick = () => {
-        alert("You have already clicked here! Game over! Final Score: "+score)
+        alert("You have already clicked this team! Game over! Final Score: "+score)
         resetClicked()
         wipeScore()
     }
@@ -100,11 +98,9 @@ function MemoryCards() {
             setClicked(team.id)
             shuffleTeams()
             incScore()
-            console.log(score+1)
         }
 
         const toggleSecondClick = () => {
-            console.log("You already clicked here")
             duplicateClick()
 
         }
