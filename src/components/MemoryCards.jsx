@@ -8,6 +8,7 @@ function MemoryCards() {
     const [error, setError] = useState(false)
     const [teams, setTeams] = useState(null)
     const [score, setScore] = useState(0)
+    const [highScore, setHighScore] = useState(0)
     
     useEffect(()=> {
     async function returnTeamData(){
@@ -32,7 +33,6 @@ function MemoryCards() {
     },[]);
     
     const shuffleTeams = () => {
-        let newAr = [...teams]
         let currentIndex = teams.length;
         while (currentIndex != 0) {
             // Pick a remaining element...
@@ -48,7 +48,22 @@ function MemoryCards() {
 
     const incScore = () => {
         setScore(score+1)
-        console.log("Current is "+(score+1))
+        setHighScoreTally()
+        checkWin()
+    }
+
+    const setHighScoreTally = () => {
+        if (score+1>highScore){
+            setHighScore(score+1)
+        }
+    }
+
+    const checkWin = () => {
+        if(score+1===32){
+            alert("Congrats! You found them all! Click to reset and play again!")
+            wipeScore()
+        }
+        
     }
 
     const wipeScore = () => {
@@ -137,7 +152,8 @@ function MemoryCards() {
                 Click as many logos as you can without repeating!
                 <div className='scoreboard'>
                     <button onClick={resetClicked}>Click to reset</button>
-                    Current Score: {score}
+                    <div>Current Score: {score}</div>
+                    <div>High Score: {highScore}</div>
                 </div> 
                     <div className="card-container">
                         {teams.map((item) => (
